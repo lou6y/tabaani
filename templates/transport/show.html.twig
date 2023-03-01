@@ -1,0 +1,34 @@
+{% extends './backend/backbody.html.twig' %}
+
+{% block title %}Transport{% endblock %}
+
+{% block  content %}
+    <h1>Transport</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdTransport</th>
+                <td>{{ transport.idTransport }}</td>
+            </tr>
+            <tr>
+                <th>TypeVehicule</th>
+                <td>{{ transport.typeVehicule }}</td>
+            </tr>
+            <tr>
+                <th>dispo</th>
+                <td>{{ transport.dispo ? transport.dispo|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>indispo</th>
+                <td>{{ transport.indispo ? transport.indispo|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('transport_index') }}" class="nav-link">consulter ma liste</a>
+
+    <a href="{{ path('transport_edit', {'idTransport': transport.idTransport}) }}" class="nav-link">edit</a>
+
+    {{ include('transport/_delete_form.html.twig') }}
+{% endblock %}

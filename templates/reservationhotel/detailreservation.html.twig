@@ -1,0 +1,68 @@
+{% extends 'headerfooterFRONTACCEUIL2.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">LISTE DES RESERVATIONS</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="idReserv" class="table table-striped">
+                <thead>
+                <tr>
+                    <th >nombre des  nuits </th>
+                    <th>nombre des chambres</th>
+                    <th>type</th>
+                    <th>Date Reservation</th>
+                    <th>nombre des personnes</th>
+                    <th>supprimer</th>
+                    <th>Modifier</th>
+                    <th>Réclamer</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for r in reservationhotel %}
+                <tr>
+
+
+
+                    <td>{{ r.nbNuit }}</td>
+                    <td>{{ r.nbChambre }}</td>
+                    <td>{{ r.type }}</td>
+                    <td>{{ r.dateReservation |date("m/d/Y") }}</td>
+                    <td>{{ r.nbPersonne }}</td>
+
+
+
+
+                    <td>    <a class="btn btn-block btn-info" href="{{ path('delete_reservationhotel',{'idReserv':r.idReserv}) }}" >Supprimer</a> </td>
+                    <td>   <a class="btn btn-block btn-info" href="{{ path('edit_reservationh',{'idReserv':r.idReserv}) }}" >Modifier</a> </td>
+                    <td> <a class="btn btn-block btn-success" href="{{ path('add_reclamation',{'idReserv':r.idReserv,'obj':"Reservation Hotel"}) }}" >reclamer</a> </td>
+
+
+
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+        </div>
+
+
+        <div class="container">
+            <table>
+                <thead>
+                <th><a class="example_b" href="{{ path('add_hotel') }}">Ajouter un service</a></th>
+                </thead>
+            </table>
+
+        </div>
+
+
+{% endblock content %}

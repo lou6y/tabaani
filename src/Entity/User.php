@@ -9,6 +9,8 @@
 namespace App\Entity;
 
 use App\Validator\Constraints\ComplexPassword;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -20,6 +22,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @UniqueEntity(fields={"email"}, message="user.exists")
  */
 class User implements AdvancedUserInterface, \Serializable
+
 {
     /**
      * @ORM\Column(type="integer")
@@ -27,6 +30,19 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $username;
+
+ 
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
@@ -41,17 +57,24 @@ class User implements AdvancedUserInterface, \Serializable
      * @Assert\Length(min="8")
      * @ComplexPassword()
      */
+
     private $password;
+
+  
+
+
+    /**
+     * @ORM\Column(type="string",length=64 )
+     */
+    private $role;
+
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $isActive;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $name;
+    
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -75,6 +98,25 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $activatedAt;
 
+    
+    protected $captchaCode;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     /**
      * @return integer
      */
@@ -82,6 +124,45 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return $this->id;
     }
+
+
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $nome
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+
+
+
+/**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+
 
     /**
      * @return string
@@ -99,21 +180,39 @@ class User implements AdvancedUserInterface, \Serializable
         $this->password = $password;
     }
 
+
+    //houni
     /**
+     * @param string $username
+     */
+    public function setUsername ($username): void
+    {
+        $this->username= $username;
+    }
+
+
+
+
+    
+ /**
      * @return string
      */
-    public function getEmail()
+    public function getRole()
     {
-        return $this->email;
+        return $this->role;
     }
 
     /**
-     * @param string $email
+     * @param string $role
      */
-    public function setEmail($email): void
+    public function setRole($role): void
     {
-        $this->email = $email;
+        $this->role = $role;
     }
+
+
+
+
 
     /**
      * @return bool
@@ -131,21 +230,7 @@ class User implements AdvancedUserInterface, \Serializable
         $this->isActive = $isActive;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
-    /**
-     * @param string $nome
-     */
-    public function setName($nome): void
-    {
-        $this->name = $nome;
-    }
 
     /**
      * @return mixed
@@ -170,49 +255,103 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->activatedAt = $activatedAt;
     }
+//lll
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+
+
+
+
+
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+
+
+
+
+
+
+
+
 
     // not used
 
     /**
      * @return string
      */
-    public function getUsername()
+   /* public function getUsername()
     {
         return $this->getEmail();
     }
-
-    public function getSalt()
-    {
-        return null;
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
+*/
     /**
-     * @return bool
+     * @return string
      */
+    public function getUsername()
+     {
+         return $this->username;
+     }
+
+
+
+
+
+     public function getSalt()
+     {
+         return null;
+     }
+
+     public function eraseCredentials()
+     {
+     }
+
+     public function getRoles()
+     {
+         return array('ROLE_USER');
+     }
+
+     public function isAccountNonExpired()
+     {
+         return true;
+     }
+
+     public function isAccountNonLocked()
+     {
+         return true;
+     }
+
+     public function isCredentialsNonExpired()
+     {
+         return true;
+     }
+
+
+
+     /**
+      * @return bool
+      */
     public function isEnabled()
     {
         return $this->isActive;
@@ -223,10 +362,12 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->email,
             $this->name,
-            $this->isActive,
+            $this->email,
             $this->password,
+            
+            $this->role,
+            $this->isActive,
         ));
     }
 
@@ -235,10 +376,13 @@ class User implements AdvancedUserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->email,
+            
             $this->name,
-            $this->isActive,
             $this->password,
+            
+            $this->role,
+            $this->isActive,
+           
             ) = unserialize($serialized);
     }
 }

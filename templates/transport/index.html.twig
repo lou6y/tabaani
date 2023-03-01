@@ -1,0 +1,98 @@
+{% extends './backend/backbody.html.twig' %}
+{% block title %}Transport{% endblock %}
+
+{% block stylesheets %}
+    <!-- Custom styles for this page -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List Transport</h6>
+    </div>
+    <div class="card-body">
+    <div class="table-responsive">
+    <a href="{{ path('transport_new') }}" class="btn btn-success btn-icon-split mb-2" title="Affichez plus d'informations">
+        <span class="text">Create new</span>
+    </a>
+
+
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Id Transport</th>
+            <th>Type Vehicule</th>
+            <th>Model</th>
+            <th>Image</th>
+            <th>Prix / 24h</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transport in transports %}
+            <tr>
+                <td>{{ transport.id }}</td>
+                <td>{{ transport.typeVehicule }}</td>
+                <td>{{ transport.model }}</td>
+                <td align="center">{% if transport.getImage %}
+                    <img src="{{ asset('vehicule/'~transport.getImage ) }}" style="max-width: 150px; max-height: 150px;">
+                {% endif %}
+                </td>
+                <td>{{ transport.prix24h }}</td>
+
+
+
+                <td>
+                        <a  href="{{ path('transport_edit', {'idTransport': transport.id}) }}" class="btn btn-warning"  title="Edit">
+
+                            edit
+                        </a>
+                    <a data-toggle="modal" data-target="#delModal{{ transport.id }}" class="btn btn-danger" title="Supprimer" href="#">
+                         <span class="icon text-white-50">
+                                    <i class="fas fa-trash"></i>
+                                </span>
+                    </a>
+
+                </td>
+
+            </tr>
+            <div class="modal fade" id="delModal{{ transport.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Etes-vous sûr de vouloir supprimer cet reservation?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                            <a class="btn btn-danger" href="{{ path('transport_delete', {'idTransport': transport.id}) }}">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+
+
+
+        </tbody>
+
+    </table>
+
+    {% block javascripts %}
+        <!-- Page level plugins -->
+        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="/js/demo/datatables-demo.js"></script>
+        <script src="/js/demo/chart.js"></script>
+        <script src="/js/demo/chart-pie-demo.js"></script>
+    {% endblock %}
+
+{% endblock %}

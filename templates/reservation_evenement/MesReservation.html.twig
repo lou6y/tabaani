@@ -1,0 +1,111 @@
+
+
+{% extends 'headerfooterFRONTACCEUIL2.html.twig' %}
+
+
+
+{% block content %}
+
+    <table class="table " id="tablereservation" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Mail</th>
+            <th>Telephone</th>
+            <th>Nom User</th>
+            <th>delete</th>
+            <th>Reclamer</th>
+            <th>Imprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.nom }}</td>
+                <td>{{ reservation.prenom }}</td>
+                <td>{{ reservation.mail  }}</td>
+                <td>{{ reservation.telephone }}</td>
+                <td>{{ reservation.idUser.email }}</td>
+                <td><a class="btn btn-danger" href="{{ path('reservationevenement_deleteF', {'id': reservation.id}) }}">Supprimer</a></td>
+                <td><a class="btn btn-block btn-success" href="{{ path('add_reclamation',{'idReserv':reservation.id,'obj':"Reservation Evenement"}) }} " >reclamer</a> </td>
+
+                <td><a class="btn btn-danger" href="{{ path('eventpdf', {'idres': reservation.id}) }}">imprimer</a></td>
+
+
+            </tr>
+            <div class="modal fade" id="delModal{{ reservation.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Etes-vous sûr de vouloir supprimer cet reservation?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                            <a class="btn btn-danger" href="{{ path('reservationevenement_deleteF', {'id': reservation.id}) }}">Supprimer</a>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="navigation">
+            {{ knp_pagination_render(reservations) }}
+        </div>
+
+
+
+
+
+        </tbody>
+
+    </table>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#search').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#tablereservation tbody tr ').each(function(){
+                    var found = 'false';
+                    $(this).each(function(){
+                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                        {
+                            found = 'true';
+                        }
+                    });
+                    if(found == 'true')
+                    {
+                        $(this).show();
+
+                    }
+                    else
+                    {
+                        $(this).hide();
+
+                    }
+                });
+            }
+        });
+    </script>
+
+    {% block javascripts %}
+        <!-- Page level plugins -->
+        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="/js/demo/datatables-demo.js"></script>
+        <script src="/js/demo/chart.js"></script>
+        <script src="/js/demo/chart-pie-demo.js"></script>
+
+    {% endblock %}
+
+{% endblock %}

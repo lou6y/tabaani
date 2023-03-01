@@ -1,0 +1,161 @@
+
+
+{% extends 'headerfooterFRONTACCEUIL2.html.twig' %}
+{% block title %}Reservation{% endblock %}
+{% block stylesheets %}
+    <!-- Custom styles for this page -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List Reservation</h6>
+    </div>
+    <div class="card-body">
+    <div class="table-responsive">
+        <a href="{{ path('reservation_new') }}" class="btn btn-success btn-icon-split mb-2" title="Affichez plus d'informations">
+            <span class="text">Create new</span>
+        </a>
+    <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
+    <input id="search" class="form-control " type="text" name="search" placeholder="Search ..." aria-label="Search"  >
+
+
+    <table class="table " id="tablereservation" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>IdReservation</th>
+                <th>Prise</th>
+                <th>Remise</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>Transport</th>
+                <th>Prix</th>
+                <th>Etat</th>
+                <th>action</th>
+                <th>reclamer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.idReservation }}</td>
+                <td>{{ reservation.prise }}</td>
+                <td>{{ reservation.remise  }}</td>
+                <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.idTransport.typeVehicule }} {{ " "}}{{ reservation.idTransport.model }}</td>
+                <td>{{ reservation.prix_total }}</td>
+
+                <td>{% if reservation.etat %}
+                        confirmée
+                    {% else %}
+                        non confirmée
+                        {% endif %}
+                </td>
+
+                <td>
+                    {% if 'now'|date('Y-m-d') < reservation.dateFin|date('Y-m-d') %}
+                    <a  href="{{ path('reservation_editF', {'idReservation': reservation.idReservation}) }}"  class="btn btn-warning"  title="Edit">
+
+                        Edit
+                    </a>
+                    {% endif %}
+                    {% if reservation.etat and 'now'|date('Y-m-d') < reservation.dateFin|date('Y-m-d') %}
+                        <a class="btn btn-danger" href="{{ path('payment', {'idReservation': reservation.idReservation}) }}">payer</a>
+
+                    {% endif %}
+                    <a data-toggle="modal" data-target="#delModal{{ reservation.idReservation }}" class="btn btn-danger" title="Supprimer" href="{{ path('reservation_deleteF', {'idReservation': reservation.idReservation})}}">
+                         <span class="icon text-white-50">
+                                    <i class="fas fa-trash"></i>
+                                </span>
+                    </a>
+
+
+
+                </td>
+                <td> <a class="btn btn-block btn-success" href="{{ path('add_reclamation',{'idReserv': reservation.idReservation,'obj':"Reservation Transport"}) }}" >reclamer</a> </td>
+
+
+            </tr>
+            <div class="modal fade" id="delModal{{ reservation.idReservation }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Etes-vous sûr de vouloir supprimer cet reservation?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                            <a class="btn btn-danger" href="{{ path('reservation_deleteF', {'idReservation': reservation.idReservation}) }}">Supprimer</a>
+                            <a class="btn btn-danger" href="{{ path('payment', {'idReservation': reservation.idReservation}) }}">payer</a>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+
+
+
+        </tbody>
+
+    </table>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#search').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#tablereservation tbody tr ').each(function(){
+                    var found = 'false';
+                    $(this).each(function(){
+                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                        {
+                            found = 'true';
+                        }
+                    });
+                    if(found == 'true')
+                    {
+                        $(this).show();
+
+                    }
+                    else
+                    {
+                        $(this).hide();
+
+                    }
+                });
+            }
+        });
+    </script>
+
+    {% block javascripts %}
+        <!-- Page level plugins -->
+        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="/js/demo/datatables-demo.js"></script>
+        <script src="/js/demo/chart.js"></script>
+        <script src="/js/demo/chart-pie-demo.js"></script>
+        <a  href="{{ path('reservation_list')}}"  class="btn btn-warning"  title="imprimer">
+
+            imprimer
+        </a>
+    {% endblock %}
+
+{% endblock %}

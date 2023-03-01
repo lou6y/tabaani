@@ -1,0 +1,68 @@
+{% extends 'headerfooterFRONTACCEUIL2.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">LISTE DES RESERVATION</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="idReserv" class="table table-striped">
+                <thead>
+                <tr>
+                    <th >nom du resto</th>
+                    <th >nombre de  personnes </th>
+                    <th>mail</th>
+                    <th>numero</th>
+                    <th>modifier</th>
+                    <th>supprimer</th>
+                    <th>reclame</th>
+
+
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for r in reservationresto %}
+                <tr>
+
+
+                    <td>{{ r.idResto.nomresto}}</td>
+                    <td>{{ r.Nbpersonne }}</td>
+                    <td>{{ r.mail }}</td>
+                    <td>{{ r.numero }}</td>
+
+                    <td>
+                        <a class="btn btn-block btn-success" href="{{ path('edit_Reservationresto',{'idResResto':r.idResResto}) }}" > modifier</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-block btn-danger" href="{{ path('delete_Reservationresto',{'idResResto':r.idResResto}) }}" >supprimer </a>
+                    </td>
+                    <td><a class="btn btn-block btn-success" href="{{ path('add_reclamation',{'idReserv':r.idResResto,'obj':"Reservation Resto"}) }} " >reclamer</a> </td>
+                    <td><a class="btn btn-danger" href="{{ path('restopdf', {'idResResto':r.idResResto}) }}">imprimer</a></td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+        </div>
+
+
+        <div class="container">
+            <table>
+                <thead>
+                <th>aucune reservation trouvée</th>
+                <th><a class="example_b" href="{{ path('list_Restofront') }}">Ajouter une reservation</a></th>
+                </thead>
+            </table>
+
+        </div>
+
+
+{% endblock content %}

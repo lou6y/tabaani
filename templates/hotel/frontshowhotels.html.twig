@@ -1,0 +1,78 @@
+{% extends 'frontend/headerfooterfront.html.twig' %}
+{% block content %}
+    {% for h in hotel %}
+
+<!-- slider Area End-->
+<!-- Favourite Places Start -->
+<div class="favourite-place place-padding">
+    <div class="container">
+        <!-- Section Tittle -->
+
+        <div class="row">
+
+
+
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+
+                        <div class="single-place mb-30">
+
+                            <div class="place-img">
+                                <img src="{{ asset('images/hotel/') }}{{ h.imageName }}" height="300" width="300">
+                            </div>
+                            <div class="place-cap">
+                                <div class="place-cap-top">
+                                    <span><i class="fas fa-star"></i><span>8.0 Superb</span> </span>
+                                    <h3><a href="#">  {{ h.nom }}</a></h3>
+                                    <p class="dolor">{{ h.tarif  }} dt<span>/ Per Person</span></p>
+                                </div>
+                                <div class="place-cap-bottom">
+                                    <ul>
+                                        <li><i class="fas fa-map-marker-alt"></i>{{ h.emplacement }}</li>
+                                        <li><a class="btn btn-dark" href="{{ path('detailfront_hotel',{'idHotel':h.idHotel}) }}" > detail</a>
+                                        <li><a class="btn btn-dark" href="{{ path('add_reservationHotel',{'idHotel':h.idHotel}) }}">reservation</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+    {% endfor %}
+
+
+
+
+        <div class="navigation">
+            {{ knp_pagination_render(hotel) }}
+        </div>
+
+
+
+    <div class="button_cont"><a class="example_b" href="{{ path('frontacceuil') }}" >retour</a></div>
+
+
+    <!--===============================================================================================-->
+    <script src="{{ asset('acss/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('acss/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('acss/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('acss/vendor/select2/select2.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('acss/js/main.js') }}"></script>
+
+
+    <script src="{{ asset('JS/jquery.js') }}"></script>
+
+
+
+
+{% endblock content %}

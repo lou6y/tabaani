@@ -1,0 +1,73 @@
+{% extends './backend/backbody.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% if resto %}
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">LISTE DES RESTOS</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="resto" class="table table-striped">
+                <thead>
+                <tr>
+
+                    <th>nom</th>
+                    <th>nbre de place</th>
+                    <th>budget</th>
+
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for r in resto %}
+                    <tr>
+
+                        <td>{{ r.nomresto }}</td>
+                        <td>{{ r.nbplace }}</td>
+                        <td>{{ r.budget }}</td>
+
+
+                        <td>
+                            <a class="btn btn-block btn-success" href="{{ path('edit_Resto',{'idResto':r.idResto}) }}" > modifier</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-block btn-danger" href="{{ path('delete_Resto',{'idResto':r.idResto}) }}" >supprimer </a>
+                        </td>
+
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                <tr>
+                    <td>
+                        <a class="btn btn-primary btn-lg"  href="{{ path('Sort_Resto',{'sort':'ASC'}) }}">Trier par budget ASCENDANT</a>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg" href="{{ path('Sort_Resto',{'sort':'DESC'}) }}">Trier par budget DESCENDANT </a>
+                    </td>
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(resto) }}
+        </div>
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+                <th>aucun resto trouvée</th>
+                <th><a class="example_b" href="{{ path('add_resto') }}">Ajouter un resto</a></th>
+                </thead>
+            </table>
+
+        </div>
+
+    {% endif %}
+{% endblock content %}

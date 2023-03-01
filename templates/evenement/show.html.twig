@@ -1,0 +1,43 @@
+{% extends 'backend/backbody.html.twig' %}
+
+
+{% block content %}
+    <h1>Evenement</h1>
+    <a class="btn btn-info" href="{{ path('list_evenementback') }}">back to list</a>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>Nbplace</th>
+                <td>{{ evenement.nbplace }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ evenement.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ evenement.prix }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenement.description }}</td>
+            </tr>
+            <tr class="place-img">
+               <td> <img src="{{ asset('images/hotel/') }}{{ evenement.eventpic }}" height="300" width="300"></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <a class="btn btn-warning" href="{{ path('evenement_edit', {'id': evenement.id}) }}">edit</a>
+
+<form  method="post" action="{{ path('evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+    <button class="btn btn-danger">Delete</button>
+{% endblock %}

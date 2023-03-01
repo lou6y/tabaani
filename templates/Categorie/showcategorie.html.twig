@@ -1,0 +1,57 @@
+{% extends './backend/backbody.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% if categorie %}
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">LISTE DES CATEGORIES</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="categorie" class="table table-striped">
+                <thead>
+                <tr>
+
+                    <th>nom</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in categorie %}
+                    <tr>
+
+                        <td>{{ c.NomCategorie }}</td>
+
+
+
+                        <td>
+                            <a class="btn btn-block btn-success" href="{{ path('edit_categorie',{'idCategorie':c.idCategorie}) }}" > modifier</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-block btn-danger" href="{{ path('delete_categorie',{'idCategorie':c.idCategorie}) }}" >supprimer </a>
+                        </td>
+
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+                <th>aucun categorie trouvée</th>
+                <th><a class="example_b" href="{{ path('add_categorie') }}">Ajouter un categorie</a></th>
+                </thead>
+            </table>
+
+        </div>
+
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'frontend/headerfooterfront.html.twig' %}
+
+
+{% block content %}
+
+<main>
+<div class="slider-area ">
+            <!-- Mobile Menu -->
+            <div class="slider-active">
+                <div class="single-slider hero-overly  slider-height d-flex align-items-center" data-background="assets/img/hero/h1_hero.jpg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-9 col-md-9">
+                                <div class="hero__caption">
+                                    <h1>Edit  <span>Your Acount!</span> </h1>
+
+</div>
+</div>
+</div>   
+</div>
+
+
+
+
+
+
+
+
+{% block content %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <h1>Edit User</h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    
+    {{ include('user/deleteUserBack.html.twig') }}
+
+{% endblock %}
+
+
+
+
+        {% endblock %}
+
+
+
+
+
+
+</div>
+</div>
+
+{% endblock %}

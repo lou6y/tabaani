@@ -1,0 +1,56 @@
+{% extends 'backend/backbody.html.twig' %}
+
+
+{% block content %}
+    <h1>Evenements</h1>
+
+    <a class="btn btn-success" href="{{ path('evenement_new') }}">Create new</a>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Nbplace</th>
+                <th>Lieu</th>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>Reponses</th>
+                <th>show</th>
+                <th>edit</th>
+                <th>supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in recs %}
+            <tr>
+                <td>{{ evenement.nomevent}}</td>
+                <td>{{ evenement.nbplace }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.prix }}</td>
+                <td>{{ evenement.description }}</td>
+                <td><a class="btn btn-primary" href="{{ path('list_reservEventEvent', {'idEvent': evenement.id}) }}">Reponses</a></td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('evenement_show', {'id': evenement.id}) }}">Consulter</a></td>
+                <td> <a class="btn btn-warning" href="{{ path('evenement_edit', {'id': evenement.id}) }}">edit</a></td>
+                    <td><form  method="post" action="{{ path('evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(recs) }}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'frontend/headerfooterfront.html.twig' %}
+{% block content %}
+
+    {{ form_start(form,{attr:{'id':'form'}}) }}
+
+    <div class="container">
+
+
+    <div class="form-group">
+        {{ form_label(form.Title,"Title de la reclamation:" ) }}
+
+        {{ form_widget(form.Title,{attr: {class:'form-control'}}) }}
+
+        {{ form_label(form.Description,"Description de la reclamation:" ) }}
+
+        {{ form_widget(form.Description,{attr: {class:'form-control'}}) }}
+    </div>
+
+    <div class="button_cont" align="center">
+        <div class="button_cont" align="center"><input  type="submit" value="modifier" class="example_b"></div>
+    </div>
+    </div>
+
+
+
+
+
+    {{ form_end(form) }}
+{% endblock content %}

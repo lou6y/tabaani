@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard 2</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('backend/dist/css/alt/adminlte.pages.css') }}">-->
+
+
+</head>
+
+
+
+
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__wobble" src="{{ asset('backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-dark">
+        <!-- Left navbar links -->
+
+        <!---------------------------------------------------------------------------->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i> My Access</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+
+                    <a class="dropdown-item" href="{{ path('back1') }}">Home</a>
+                    <a class="dropdown-item" href="{{ path('frontacceuil2') }}"> Front Accueil</a>
+                </div>
+            </li>
+
+        </ul>
+        <!-------------------------------------------------------------------------->
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Navbar Search -->
+            <li class="nav-item">
+                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <i class="fas fa-search"></i>
+                </a>
+                <div class="navbar-search-block">
+                    <form class="form-inline">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="backbody.html" class="brand-link">
+            <img src="{{ asset('backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">AdminLTE 3</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{{ asset('backend/dist/img/eya1.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Eya Ben Moulehem</a>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+
+            <!-- SidebarSearch Form -->
+
+
+
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <!-----------------------------------------------------Eya------------------------------------------------------------->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                               Gestion User
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('user_index1') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> Gestion des comptes </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('user_newBack') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> Ajouter un compte </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-------------------------------------------------------------------------------------------------------------->
+
+                    <!-----------------------------------------------------AHMED------------------------------------------------------------->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des hotels
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_hotel') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un hotel</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_hotel') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste des hotels</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des services
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_service') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un service</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_service') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste des services</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <!------------------------------------------------------------------------------------------------------------------>
+
+                    <!-----------------------------------------------------Mariem------------------------------------------------------------->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des restos
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_resto') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un resto</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_Resto') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste des restos</p>
+                                </a>
+                            </li>
+                       </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des categories
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_categorie') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un categorie</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_categorie') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste des categories</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!------------------------------------------------------------------------------------------------------------------>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des Reservation
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('list_reservationhotelback') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Réservation hôtel</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_reservationrestoback') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Réservation Resto</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('reservationevenement_index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Réservation Evenement</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des Transports
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('reservation') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Reservation transport</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('transport') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Liste Transports</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-----------------------------------------------Louay------------------------------------------------------------>
+
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des reclamations
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('list_reclamationback') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>consulter les reclamations</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+<!--------------------------------------------------------------------------------------------------------------------------->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des Evenement
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('evenement_new') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Nouveau Evenement</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_evenementback') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Liste Evenement</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </nav>
+
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        {% block content %}
+
+
+
+
+
+
+        {% endblock %}
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 3.1.0-rc
+        </div>
+    </footer>
+
+    {% block js %}
+
+        <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <script src="{{ asset('backend/dist/js/adminlte.js') }}"></script>
+        <script src="{{ asset('backend/plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
+        <script src="{{ asset('backend/plugins/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('backend/plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
+        <script src="{{ asset('backend/plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
+        <script src="{{ asset('backend/plugins/chart.js/Chart.min.js') }}"></script>
+        <script src="{{ asset('backend/dist/js/demo.js') }}"></script>
+        <script src="{{ asset('backend/dist/js/pages/dashboard2.js') }}"></script>
+    {% endblock %}
+</div>
+<!-- ./wrapper -->
+
+</body>
+</html>

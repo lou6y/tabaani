@@ -1,0 +1,62 @@
+{% extends 'backend/backbody.html.twig' %}
+
+
+{% block content %}
+
+    <h1>Edit Evenement</h1>
+{{ form_start(form) }}
+<div class="container">
+    <div class="form-group">
+
+        {{ form_label(form.nomevent,"nom:" ) }}
+
+        {{ form_widget(form.nomevent,{attr: {class:'form-control'}}) }}
+
+
+    </div>
+    <div class="form-group">
+
+        {{ form_label(form.nbplace,"nbplace:" ) }}
+
+        {{ form_widget(form.nbplace,{attr: {class:'form-control'}}) }}
+
+
+    </div>
+    <div class="form-group">
+        {{ form_label(form.lieu,"lieu :") }}
+
+        {{ form_widget(form.lieu, {attr: {class:'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.prix,"prix :") }}
+
+        {{ form_widget(form.prix, {attr: {class:'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description,"description :") }}
+
+        {{ form_widget(form.description, {attr: {class:'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.imageFile,"image:") }}
+
+        {{ form_widget(form.imageFile,{ 'attr': {'id': 'image'} }) }}
+    </div>
+
+
+
+
+
+    <button type="submit" href="{{ path('list_reservationhotel') }}" class="btn btn-primary">modifier</button>
+
+</div>
+{{ form_end(form) }}
+
+
+
+    <form  method="post" action="{{ path('evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+    <button class="btn btn-danger">Delete</button>
+{% endblock %}

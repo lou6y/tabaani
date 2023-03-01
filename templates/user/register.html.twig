@@ -1,6 +1,28 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'frontend/headerfooterfront.html.twig' %}
+{% block dire %}
+<a href="{{ path('edit') }}">login</a>
+{% endblock %}
 {% block content %}
+
+<main>
+<div class="slider-area ">
+            <!-- Mobile Menu -->
+            <div class="slider-active">
+                <div class="single-slider hero-overly  slider-height d-flex align-items-center" data-background="assets/img/hero/h1_hero.jpg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-9 col-md-9">
+                                
+
+  <div class="image"   >
+                    <img src="{{ asset('backend/dist/img/ch.png') }}" style='width:800px;'    >
+                </div>
+</div>
+</div>   
+</div>
+
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -10,6 +32,8 @@
 
                 {{ form_row(form.email) }}
                 {{ form_row(form.password) }}
+                {{ form_row(form.captchaCode) }}
+
 
                 <div class="g-recaptcha" data-sitekey="{{ captchakey }}"></div><br>
 
@@ -20,9 +44,21 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+</div>
+</div>
+
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src='//www.google.com/recaptcha/api.js?hl={{ locale }}'></script>
+
+
+
+
 {% endblock %}

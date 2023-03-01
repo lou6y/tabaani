@@ -1,0 +1,91 @@
+{% extends './backend/backbody.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% if Reservationhotel  %}
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">LISTE DES HOTELS</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="chauffeur" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID Reservation </th>
+                    <th >nombre des  nuits </th>
+                    <th>nombre des chambres</th>
+                    <th>type</th>
+                    <th>Date Reservation</th>
+                    <th>nombre des personnes</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for h in Reservationhotel %}
+                    <tr>
+                        <td>{{ h.idReserv }}</td>
+                        <td>{{ h.nbNuit }}</td>
+                        <td>{{ h.nbChambre }}</td>
+                        <td>{{ h.type }}</td>
+                        <td>{{ h.dateReservation |date("m/d/Y") }}</td>}
+                        <td>{{ h.nbPersonne }}</td>
+
+                        {#         <td>
+                            <a class="btn btn-block btn-info" href="{{ path('detail_hotel',{'idHotel':h.idHotel}) }}" > detail</a>
+
+                        </td>
+                        <td>
+                            <a class="btn btn-block btn-success" href="{{ path('edit_hotel',{'idHotel':h.idHotel}) }}" > modifier</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-block btn-danger" href="{{ path('delete_hotel',{'idHotel':h.idHotel}) }} " >supprimer </a>
+                        </td>
+
+                        </td>
+                        #}
+
+                        <td>
+
+                            <a class="btn btn-block btn-danger" href="{{ path('delete_reservationh',{'idReserv':h.idReserv}) }} " >supprimer </a>
+
+                        </td>
+
+
+
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+            <th>
+                <a class="btn btn-primary btn-lg"  href="{{ path('sortASC')}}">Sort By price ASCENDING</a>
+                <a class="btn btn-primary btn-lg" href="{{ path('sortDESC') }}">Sort By price DESCENDING</a>
+
+            </th>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(Reservationhotel) }}
+        </div>
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+
+                <th><a class="example_b" href="{{ path('add_service') }}">Ajouter un service</a></th>
+
+                </thead>
+            </table>
+
+        </div
+
+
+    {% endif %}
+
+    <form method="get">
+        <input hidden value="TELECHARGER_PDF" name="TELECHARGER_PDF">
+        <input value="TELECHARGER_PDF" type="submit" class="add-to-cart btn btn-default" >
+    </form>
+{% endblock content %}

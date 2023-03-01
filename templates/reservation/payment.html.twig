@@ -1,0 +1,114 @@
+
+
+
+    <link rel="stylesheet" href="{{ asset('stripecss/stripe.css') }} ">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/payment.css') }}"/>
+
+    <div class="container">
+            <div class="left border">
+                <div class="row">
+                    <div style="float: right">
+                        <a href="{{ path('listRF') }}"> <i class="far fa-times-circle" style="font-size:18px  "></i></a>
+                    </div>
+                    <div class="header" style="text-align: center">Payment</div>
+                    <div class="icons"> <img src="https://img.icons8.com/color/48/000000/visa.png" /> <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /> <img src="https://img.icons8.com/color/48/000000/maestro.png" /> </div>
+                </div>
+                <form method="get" id='payment-form'>
+                    <form>   <span>Card Number:</span> <input placeholder="0125 6780 4567 9909">
+                        <div class="row">
+                            <div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
+                            <div class="col-4"><span>CVV:</span> <input id="cvv"> </div>
+                        </div>
+                    </form>
+
+                    <a href="{{ path('listRF') }}"  > <input type="submit" class="button" value="submit payment"><br></a>
+                    <style>
+                    .button {
+                        padding: 10px 25px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 15px;
+                        margin: 4px 2px;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                        background-color: white;
+                        color: black;
+                        border: 2px solid royalblue;
+                    }
+                    .button:hover {
+                        background-color: royalblue;
+                        color: white;
+                    }
+                    </style>
+            </a>
+        </form>
+    </div>
+    </div>
+
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        var stripe = Stripe('pk_test_51IXEsZDIEzaiQ6dmg6yuaZBJQg5gk5V5v9WDHisbvuDElY3XIh3DlXdUCFMhmgyBEFpzLDq2K5Iiw5IWJIQZAfMT005ckqZvGq');
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+            // Submit the form
+            form.submit();
+        }
+    </script>
+        <script src="https://kit.fontawesome.com/5d0752b967.js" crossorigin="anonymous"></script>

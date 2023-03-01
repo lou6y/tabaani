@@ -1,0 +1,45 @@
+{% extends './backend/backbody.html.twig' %}
+{% block content %}
+    <div class="card">
+    <div class="card-header">
+        <h3 class="card-title">LISTE DES CHAUFFEURS</h3>
+    </div>
+
+    <div class="card-body p-0">
+        <table id="chauffeur" class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>nom</th>
+                <th>emplacement</th>
+                <th>contact</th>
+                <th>tarif</th>
+                <th>categ</th>
+                <th>type</th>
+            </tr>
+            </thead>
+            <tr>
+
+                <td>{{ h.idHotel }}</td>
+                <td>{{ h.nom }}</td>
+                <td>{{ h.emplacement }}</td>
+                <td>{{ h.contact }}</td>
+                <td>{{ h.tarif }}</td>
+                <td>{{ s.categ }}</td>
+                <td>{{ s.type }}</td>
+                <td><img class="img-fluid" src="{{ asset('images/hotel/' ~ h.imageName) }}"  height="50" width="50"></td>
+
+
+
+            </tr>
+
+
+        </table>
+        <div align="center">
+            <a class="btn btn-block btn-info" href="{{ path('list_hotel') }}" >retour</a>
+        </div>
+    </div>
+
+
+
+{% endblock content %}

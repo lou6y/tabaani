@@ -1,0 +1,106 @@
+{% extends 'frontend/headerfooterfront.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% if recs %}
+        <div class="card">
+        <div class="card-header">
+            <input id="search" class="form-conrol" type = "text" name= "search" placeholder="Search .." ana-lavel="Search" >
+            <h3 class="card-title">Liste de mes Reclamations</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="tablereclamation" class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10px">Id </th>
+                    <th>Date Reclamation</th>
+                    <th>Objet</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Option</th>
+
+                    <th></th>
+                    <th></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for s in recs %}
+                    <tr>
+                        <td>{{ s.id}}</td>
+                        <td>{{ s.DateRec |date("m/d/Y")}}</td>
+                        <td>{{ s.Objet}}</td>
+                        <td>{{ s.Title}}</td>
+                        <td>{{ s.Description }}</td>
+
+
+
+                    {% if s.Statut ==0 %}
+
+                             <td>
+                        <a class="btn btn-block btn-success" href="{{ path('edit_reclamation',{'idRec':s.id}) }} " >modifier</a>
+                            </td>
+                            <td>
+                        <a class="btn btn-block btn-danger" href="{{ path('delete_reclamation',{'idRec':s.id}) }} " >supprimer </a>
+                            </td>
+                    </td>
+                {% else %}
+                    <td>
+                    <a class="btn btn-block btn-success" href="{{ path('show_reponsefront',{'idrec':s.id}) }} " >consulter Reponse </a>
+
+                    </td>
+
+                    <td></td>
+                    {% endif %}
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(recs) }}
+        </div>
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+                <th>Aucun reclamation trouvée</th>
+
+                </thead>
+            </table>
+
+        </div>
+
+    {% endif %}
+    <script>
+        $(document).ready(function(){
+            $('#search').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#tablereclamation tbody tr ').each(function(){
+                    var found = 'false';
+                    $(this).each(function(){
+                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                        {
+                            found = 'true';
+                        }
+                    });
+                    if(found == 'true')
+                    {
+                        $(this).show();
+
+                    }
+                    else
+                    {
+                        $(this).hide();
+
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock content %}

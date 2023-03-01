@@ -1,0 +1,37 @@
+{% extends './backend/backbody.html.twig' %}
+
+{% block content %}
+    <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Mail</th>
+            <th>Telephone</th>
+            <th>Mail User</th>
+            <th>nom event</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+
+                <td>{{ reservation.nom }}</td>
+                <td>{{ reservation.prenom }}</td>
+                <td>{{ reservation.mail }}</td>
+                <td>{{ reservation.telephone }}</td>
+                <td>{{ reservation.idUser.email }}</td>
+                <td>{{ reservation.Evenement.nomevent }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

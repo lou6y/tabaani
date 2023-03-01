@@ -1,0 +1,29 @@
+
+<link rel="stylesheet" href="{{ asset('frontend/css/form_new.css') }}">
+<div class="container">
+    
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    {{ form_start(form) }}
+ 
+
+    <label for="Email"><b>Email</b></label>
+    {{ form_widget(form.email) }}
+
+    <label for="Password"><b>Password</b></label>
+    {{ form_widget(form.password) }}
+
+  <a href="{{ path('security_login') }}">{{ 'user.yes-account'|trans }}</a>
+
+    <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+    </label>
+
+    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+    <div class="clearfix">
+
+       <button  class="btn btn-warning"> {{ button_label|default('Save') }} </button>
+    </div>
+    {{ form_end(form) }}
+</div>

@@ -1,0 +1,70 @@
+{% extends './backend/backbody.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% if service %}
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">LISTE DES SERVICES</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="id_service" class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10px">Id </th>
+                    <th>categ</th>
+                    <th>type</th>
+
+
+                    <th>nom hotel</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for s in service %}
+                    <tr>
+                        <td>{{ s.idService }}</td>
+                        <td>{{ s.categ }}</td>
+                        <td>{{ s.type }}</td>
+                        <td>{{ s.idHotel.nom}}</td>
+
+
+
+                        <td>
+
+                        </td>
+                        <td>
+
+                            <a class="btn btn-block btn-success" href="{{ path('edit_service',{'idService':s.idService}) }} " > modifier</a>
+
+                        </td>
+
+                        <td>
+                            <a class="btn btn-block btn-danger" href="{{ path('delete_service',{'idService':s.idService}) }} " >supprimer </a>
+                        </td>
+
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(service) }}
+        </div>
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+                <th>aucun service trouv trouvée</th>
+                <th><a class="example_b" href="{{ path('add_service') }}">Ajouter un service</a></th>
+                </thead>
+            </table>
+
+        </div>
+
+    {% endif %}
+{% endblock content %}

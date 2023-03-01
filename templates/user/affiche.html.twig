@@ -1,0 +1,51 @@
+{% extends 'dash.html.twig' %}
+{% block activeFormation %}
+salut
+{% endblock %}
+
+
+
+
+
+eE123456 eya
+Cc123456 cherifa
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{ 'user.reset-password'|trans }}</h1>
+                {{ form_start(form) }}
+                
+                {{ form_row(form.password.first) }}
+                {{ form_row(form.password.second) }}
+
+                <button type="submit" class="btn btn-default  btn-primary" formnovalidate>{{ 'button.save'|trans }}</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{%
+ endblock %}
+
+////////////////////////////////////////////////////////////////////////////////////////edit//////////////////////////////////////////////////////////////////////////////////////
+   <h1>Edit User</h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('user_index') }}">back to list</a>
+
+    {{ include('user/delete_Back.html.twig') }}
+
+/////////////////////////////////////////////////////
+
+
+
+
+
+
+

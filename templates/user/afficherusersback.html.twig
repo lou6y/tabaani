@@ -1,0 +1,57 @@
+{% extends './backend/backbody.html.twig' %}
+
+
+{% block content %}
+
+            <div align="left">
+            <button type="button" class="btn btn-success" >
+                <i class="fas fa-times"></i><a href="{{ path('user_trieadmin') }}">ADMIN</a>  </button>
+
+            <button type="button" class="btn btn-success" >
+                <i class="fas fa-times"></i> <a href="{{ path('user_trieclient') }}">CLient</a> </button>
+            <button type="button" class="btn btn-success" >
+                <i class="fas fa-times"></i> <a href="{{ path('user_index1') }}">ALL</a> </button>
+    </div>
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                
+                <th>PWD</th>
+
+                <th>Role</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+               
+
+                <td>{{ user.role }}</td>
+                <td>
+                <button type="button" class="btn btn-warning">
+                    <a href="{{ path('user_edit1', {'id': user.id}) }}">edit</a> </button>
+                </td>
+
+                <td>  {{ include('user/delete_Back.html.twig') }} </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+        {% endblock content %}

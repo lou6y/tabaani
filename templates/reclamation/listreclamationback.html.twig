@@ -1,0 +1,75 @@
+{% extends './backend/backbody.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% if recs %}
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Liste de mes Reclamations</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="id_service" class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10px">Id </th>
+                    <th>Date Reclamation</th>
+                    <th>Objet</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Id reservation</th>
+                    <th>ID client</th>
+                    <th>Email client</th>
+                    <th>Option</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for s in recs %}
+                    <tr>
+                        <td>{{ s.id}}</td>
+                        <td>{{ s.DateRec |date("m/d/Y")}}</td>
+                        <td>{{ s.Objet}}</td>
+                        <td>{{ s.Title}}</td>
+                        <td>{{ s.Description }}</td>
+                        <td>{{ s.idreserv}}</td>
+
+
+
+                    {% if s.Statut ==0 %}
+                        <td>
+
+                            <a class="btn btn-block btn-secondary" href="{{ path('add_reponse',{'idRec':s.id}) }}"  > Repondre</a>
+
+                        </td>
+                {% else %}
+                    <td>
+
+                        <a class="btn btn-block btn-success" href="{{ path('show_reponse',{'idrec':s.id}) }}"  > Consulter reponse</a>
+
+                    </td>
+                    {% endif %}
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(recs) }}
+        </div>
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+                <th>Aucun reclamation trouvée</th>
+
+                </thead>
+            </table>
+
+        </div>
+
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'backend/backbody.html.twig' %}
+
+
+{% block content %}
+    <h1>Create new Evenement</h1>
+{{ form_start(form) }}
+<div class="container">
+    <div class="form-group">
+
+        {{ form_label(form.nomevent,"nom:" ) }}
+
+        {{ form_widget(form.nomevent,{attr: {class:'form-control'}}) }}
+
+
+    </div>
+    <div class="form-group">
+
+        {{ form_label(form.nbplace,"nbplace:" ) }}
+
+        {{ form_widget(form.nbplace,{attr: {class:'form-control'}}) }}
+
+
+    </div>
+        <div class="form-group">
+            {{ form_label(form.lieu,"lieu :") }}
+
+            {{ form_widget(form.lieu, {attr: {class:'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.prix,"prix :") }}
+
+            {{ form_widget(form.prix, {attr: {class:'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description,"description :") }}
+
+            {{ form_widget(form.description, {attr: {class:'form-control'}}) }}
+        </div>
+
+    <div class="form-group">
+        {{ form_label(form.imageFile,"image:") }}
+
+        {{ form_widget(form.imageFile,{ 'attr': {'id': 'image'} }) }}
+    </div>
+
+
+
+
+
+        <button type="submit" href="{{ path('list_reservationhotel') }}" class="btn btn-primary">créer</button>
+
+    </div>
+    {{ form_end(form) }}
+    <a class="btn btn-info" href="{{ path('list_evenementback') }}">back to list</a>
+{% endblock %}

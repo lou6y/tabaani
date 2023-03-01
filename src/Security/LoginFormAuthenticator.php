@@ -34,6 +34,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $formFactory;
     private $passwordEncoder;
     private $router;
+    private $t=0;
 
     function __construct(EntityManagerInterface $em, FormFactoryInterface $formFactory, UserPasswordEncoderInterface $passwordEncoder, RouterInterface $router)
     {
@@ -78,6 +79,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $username = $credentials['_username'];
+        $yo=$this->em->getRepository(User::class)
+            ->findOneBy(['email' => $username]);
+
+        if($yo->getRole()=="Admin")
+        {
+            $this->t=1;
+        }
+        else
+            $this->t=2;
 
         return $this->em->getRepository(User::class)
             ->findOneBy(['email' => $username]);
@@ -124,12 +134,32 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($targetPath);
     }
 
+
+
+
     /**
      * @return string
      */
     protected function getDefaultSuccessRedirectUrl()
     {
-        return $this->router->generate('homepage');
+        if($this->t ==0)
+        {
+            return $this->router->generate('frontacceuil');
+        }
+        else if($this->t ==1)
+        {
+            return $this->router->generate('back1');
+        }
+        else
+            return $this->router->generate('frontacceuil2');
+
     }
+
+
+
+
+
+
+
 
 }
